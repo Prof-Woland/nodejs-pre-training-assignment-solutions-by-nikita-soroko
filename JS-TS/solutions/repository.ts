@@ -1,24 +1,55 @@
+import { TodoNotFoundError } from "./todo-errors";
+
 export class InMemoryRepository<T extends { id: number }> {
   // private storage
   private items: T[] = [];
 
   add(entity: T): T {
-    throw new Error('add: not implemented');
+    if(typeof entity === undefined || typeof entity === null){
+      throw new TypeError('Entity is undefined or null');
+    };
+
+    this.items.push(entity);
+
+    return entity;
   }
 
   update(id: number, patch: Partial<T>): T {
-    throw new Error('update: not implemented');
+    let index = this.items.findIndex(el => el.id === id);
+
+    if(index === -1){
+      throw new TodoNotFoundError();
+    };
+
+    let result = this.items[index] = {...this.items[index], ...patch};
+
+    return result;
   }
 
   remove(id: number): void {
-    throw new Error('remove: not implemented');
+    let index = this.items.findIndex(el => el.id === id);
+
+    if(index === -1){
+      throw new TodoNotFoundError();
+    };
+
+    this.items.splice(index, 1);
   }
 
-  findById(id: number): T | undefined {
-    throw new Error('findById: not implemented');
+  findById(id: number): T | undefined{
+    let index = this.items.findIndex(el => el.id === id);
+
+    if(index === -1){
+      return undefined;
+    };
+
+    let result: T = this.items[index];
+
+    return result;
   }
 
   findAll(): T[] {
-    throw new Error('findAll: not implemented');
+    let result = [...this.items]
+    return result;
   }
 }
