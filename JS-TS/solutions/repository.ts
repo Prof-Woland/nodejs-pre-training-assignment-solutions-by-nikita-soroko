@@ -17,7 +17,7 @@ export class InMemoryRepository<T extends { id: number }> {
   update(id: number, patch: Partial<T>): T {
     let index = this.items.findIndex(el => el.id === id);
 
-    if(index === -1){
+    if(!this.items.find(el => el.id === id)){
       throw new TodoNotFoundError();
     };
 
@@ -29,7 +29,7 @@ export class InMemoryRepository<T extends { id: number }> {
   remove(id: number): void {
     let index = this.items.findIndex(el => el.id === id);
 
-    if(index === -1){
+    if(!this.items.find(el => el.id === id)){
       throw new TodoNotFoundError();
     };
 

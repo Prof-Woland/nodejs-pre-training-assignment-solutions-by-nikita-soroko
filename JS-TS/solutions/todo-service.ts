@@ -5,15 +5,15 @@ export class TodoService {
   constructor(private readonly api: TodoApi) { }
 
   async create(title: string, description = ''): Promise<Todo> {
-    if(title === null){
-      throw new TypeError('Title is null');
+    if(title === null || title === ''){
+      throw new TypeError('Title is empty');
     }
     return await this.api.add({title, description});
   }
 
   async toggleStatus(id: number): Promise<Todo> {
-    if(Number.isNaN(id) || id === null){
-      throw new TypeError('Id is NaN or null');
+    if(Number.isNaN(id) || id === null || id < 1){
+      throw new TypeError('Id is NaN or null or out of range');
     }
 
     return await this.api.update(id, {status: TodoStatus.COMPLETED})
