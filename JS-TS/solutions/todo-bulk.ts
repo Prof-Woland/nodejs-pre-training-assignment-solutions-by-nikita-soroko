@@ -1,7 +1,7 @@
 import { Todo, TodoStatus } from './types';
 
 export function toggleAll(state: Todo[], completed: boolean): Todo[] {
-  if(typeof state === null || typeof state === undefined){
+  if(state === null || typeof state === undefined){
     throw new TypeError('Todo array is null or undefined');
   };
 
@@ -13,7 +13,7 @@ export function toggleAll(state: Todo[], completed: boolean): Todo[] {
 }
 
 export function clearCompleted(state: Todo[]): Todo[] {
-  if(typeof state === null || typeof state === undefined){
+  if(state === null || typeof state === undefined){
     throw new TypeError('Todo array is null or undefined');
   };
 
@@ -23,7 +23,7 @@ export function clearCompleted(state: Todo[]): Todo[] {
 }
 
 export function countByStatus(state: Todo[], status: TodoStatus): number {
-  if(typeof state === null || typeof state === undefined){
+  if(state === null || typeof state === undefined){
     throw new TypeError('Todo array is null or undefined');
   };
 

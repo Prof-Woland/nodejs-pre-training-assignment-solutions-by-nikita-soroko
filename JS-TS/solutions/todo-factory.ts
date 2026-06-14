@@ -3,7 +3,7 @@ import { Todo, NewTodo, TodoStatus } from './types';
 let nextId = 1;
 
 export function createTodo(input: NewTodo): Todo {
-  if(typeof input === null || typeof input === undefined){
+  if(input === null || typeof input === undefined){
     throw new TypeError('Input is null or undefined');
   }
 

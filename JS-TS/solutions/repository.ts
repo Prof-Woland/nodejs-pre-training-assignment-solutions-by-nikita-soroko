@@ -5,7 +5,7 @@ export class InMemoryRepository<T extends { id: number }> {
   private items: T[] = [];
 
   add(entity: T): T {
-    if(typeof entity === undefined || typeof entity === null){
+    if(typeof entity === undefined || entity === null){
       throw new TypeError('Entity is undefined or null');
     };
 

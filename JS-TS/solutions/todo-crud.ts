@@ -1,7 +1,7 @@
 import { Todo } from './types';
 
 export function addTodo(state: Todo[], todo: Todo): Todo[] {
-  if(typeof state === null || typeof state === undefined){
+  if(state === null || typeof state === undefined){
     throw new TypeError('Todo array is null or undefined');
   };
 
@@ -17,7 +17,7 @@ export function addTodo(state: Todo[], todo: Todo): Todo[] {
 }
 
 export function updateTodo(state: Todo[], id: number, update: Partial<Omit<Todo, 'id' | 'createdAt'>>): Todo[] {
-  if(typeof state === null || typeof state === undefined){
+  if(state === null || typeof state === undefined){
     throw new TypeError('Todo array is null or undefined');
   };
   
@@ -37,7 +37,7 @@ export function updateTodo(state: Todo[], id: number, update: Partial<Omit<Todo,
 }
 
 export function removeTodo(state: Todo[], id: number): Todo[] {
-  if(typeof state === null || typeof state === undefined){
+  if(state === null || typeof state === undefined){
     throw new TypeError('Todo array is null or undefined');
   };
 
@@ -55,7 +55,7 @@ export function removeTodo(state: Todo[], id: number): Todo[] {
 }
 
 export function getTodo(state: Todo[], id: number): Todo | undefined {
-  if(typeof state === null || typeof state === undefined){
+  if(state === null || typeof state === undefined){
     throw new TypeError('Todo array is null or undefined');
   };
 
