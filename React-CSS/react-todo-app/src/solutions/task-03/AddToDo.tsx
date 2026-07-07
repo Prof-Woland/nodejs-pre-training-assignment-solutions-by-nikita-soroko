@@ -47,12 +47,29 @@ export const AddToDo: React.FC = () => {
   // Example implementation:
   // const [inputValue, setInputValue] = useState('');
   // const [todos, setTodos] = useState<Todo[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  let addTodo = ()=>{
+    let lastItemId: number = todos.at(-1)?.id || 0;
+    let newTodo: Todo ={
+      id: lastItemId+1,
+      title: inputValue,
+      completed: false
+    };
+    setTodos([...todos, newTodo]);
+    setInputValue('');
+  }
 
   return (
     <div>
       {/* TODO: Replace this with your implementation */}
-      <h4>Add ToDo Component</h4>
-      <p>Implement useState and form handling here</p>
+      <h4>Create ToDo Component</h4>
+      <input type="text" id='input' value={inputValue} onChange={(e)=>setInputValue(e.target.value)} placeholder='Add Todo'/>
+      <button onClick={addTodo}>Add</button>
+      <ul>
+        {todos.map(todo=><li>{todo.title} - {todo.completed ? 'completed' : 'not completed'}</li>)}
+      </ul>
     </div>
   );
 }; 
