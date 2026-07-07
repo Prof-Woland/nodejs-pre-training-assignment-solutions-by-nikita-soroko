@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Todo } from '../../types';
+import { ToDoItem } from '../task-02/ToDoItem';
 
 /**
  * Task 4: CompleteToDoList Component
@@ -57,11 +58,33 @@ export const CompleteToDoList: React.FC = () => {
   //   ));
   // };
 
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [inputValue, setInputValue] = useState('');
+
+  let addTodo = ()=>{
+      let lastItemId: number = todos.at(-1)?.id || 0;
+      let newTodo: Todo ={
+        id: lastItemId+1,
+        title: inputValue,
+        completed: false
+      };
+      setTodos([...todos, newTodo]);
+      setInputValue('');
+    }
+
+  const setCompleted = (id: number) => {
+    setTodos(todos.map(item => item.id === id ? {...item, completed: true} : item))
+  }
+
   return (
     <div>
       {/* TODO: Replace this with your implementation */}
       <h4>Complete ToDo List Component</h4>
-      <p>Implement immutable state updates here</p>
+      <input type="text" id='input' value={inputValue} onChange={(e)=>setInputValue(e.target.value)} placeholder='Add Todo'/>
+      <button onClick={addTodo}>Add</button>
+      <ul>
+        {todos.map(todo => <li><ToDoItem todo={todo}/> <button onClick={()=>(setCompleted(todo.id))}>Completed</button></li>)}
+      </ul>
     </div>
   );
 }; 
