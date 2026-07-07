@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Todo } from '../../types';
+import { ToDoItem } from '../task-02/ToDoItem';
 
 /**
  * Task 5: FilteredToDoList Component
@@ -63,11 +64,46 @@ export const FilteredToDoList: React.FC = () => {
   //   return true; // 'all' case
   // });
 
+  const [todos, setTodos] = useState<Todo[]>([]);
+    const [inputValue, setInputValue] = useState('');
+    const [filteringState, setFilteringState] = useState<'all' | 'active' | 'completed'>('all');
+
+    const filteredTodos = todos.filter(todo => {
+      if (filteringState === 'active') return !todo.completed;
+      if (filteringState === 'completed') return todo.completed;
+      return true;
+    });
+  
+    let addTodo = ()=>{
+        let lastItemId: number = todos.at(-1)?.id || 0;
+        let newTodo: Todo ={
+          id: lastItemId+1,
+          title: inputValue,
+          completed: false
+        };
+        setTodos([...todos, newTodo]);
+        setInputValue('');
+      }
+  
+    const setCompleted = (id: number) => {
+      setTodos(todos.map(item => item.id === id ? {...item, completed: true} : item))
+    }
+
   return (
     <div>
       {/* TODO: Replace this with your implementation */}
       <h4>Filtered ToDo List Component</h4>
-      <p>Implement derived state and filtering here</p>
+      <input type="text" id='input' value={inputValue} onChange={(e)=>setInputValue(e.target.value)} placeholder='Add Todo'/>
+      <button onClick={addTodo}>Add</button>
+      <p>Filter</p>
+      <div>
+        <button onClick={()=>(setFilteringState('all'))}>All</button>
+        <button onClick={()=>(setFilteringState('active'))}>Active</button>
+        <button onClick={()=>(setFilteringState('completed'))}>Completed</button>
+      </div>
+      <ul>
+        {filteredTodos.map(todo => <li><ToDoItem todo={todo}/> <button onClick={()=>(setCompleted(todo.id))}>Completed</button></li>)}
+      </ul>
     </div>
   );
 }; 
