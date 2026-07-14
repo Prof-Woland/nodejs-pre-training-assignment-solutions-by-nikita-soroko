@@ -113,6 +113,7 @@ export const FetchToDos: React.FC = () => {
       {/* TODO: Replace this with your implementation */}
       <h4>Fetch ToDos Component</h4>
       {loading ? <div>LOADING ...</div> : <ToDoList todos={todos}/>}
+      {error !== null ? <div>Something went wrong: {error}</div> : <div></div>}
     </div>
   );
 }; 

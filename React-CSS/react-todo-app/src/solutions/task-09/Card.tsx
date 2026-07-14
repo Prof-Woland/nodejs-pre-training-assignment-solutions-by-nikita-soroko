@@ -100,7 +100,9 @@ export const Card: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <div>
       {/* TODO: Replace this with your implementation */}
       <h4>Card Component</h4>
-      <p>Implement component composition with children prop here</p>
+      <div className='card'>
+        {children}
+      </div>
     </div>
   );
 }; 
